@@ -5,7 +5,7 @@ jobs:
    runs-on: ubuntu-latest
    environment: dev
    env: 
-    WELCOME_TEXT: ${{ vars.WELCOME_TEXT }}
+    WELCOME_TEXT: ${{ vars.WELCOME_TEXT }} # access env specifc variable from github
    steps:
      - name: Outupt github context
        run: | 
