@@ -1,0 +1,12 @@
+name: simple-workflow-test
+on: [workflow_dispatch]
+jobs:
+  first-job:
+   runs-on: ubantu-latest
+   steps:
+     - name : first step
+       run : first-step-start
+     - name: second-step
+       run: second-step-start
+       
+   
