@@ -1,5 +1,9 @@
 name: node-app-workflow
-on: [push,workflow_dispatch] # add multiple events # workflow_dispatch - manual trigger
+on: # [push,workflow_dispatch] # add multiple events # workflow_dispatch - manual trigger
+ pull_request:
+  types:
+    - opened
+ workflow_dispatch:
 jobs:
   test: 
    runs-on: ubuntu-latest
