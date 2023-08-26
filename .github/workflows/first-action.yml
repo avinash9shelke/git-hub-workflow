@@ -5,8 +5,8 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name : first step
-       run : first-step-start
+       run : echo "first-step-start"
      - name: second-step
-       run: second-step-start
+       run: echo "second-step-start"
        
    
