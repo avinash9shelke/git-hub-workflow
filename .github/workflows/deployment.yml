@@ -1,5 +1,5 @@
 name: node-app-workflow
-on: push
+on: [push,workflow_dispatch] # add multiple events # workflow_dispatch - manual trigger
 jobs:
   test: 
    runs-on: ubuntu-latest
