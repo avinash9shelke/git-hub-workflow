@@ -15,6 +15,7 @@ jobs:
      - name: Run Tests
        run: npm test
   deploy:
+   needs: test # name for the job which want's to complete first
    runs-on: ubuntu-latest
    steps:
      - name: get code
@@ -29,5 +30,4 @@ jobs:
        run: npm run build
      - name: Deploy
        run: echo "Depploygin the application"
-       
          
