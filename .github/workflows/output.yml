@@ -3,8 +3,11 @@ on: workflow_dispatch
 jobs:
   info: 
    runs-on: ubuntu-latest
+   environment: dev
+   env: 
+    WELCOME_TEXT: ${{ vars.WELCOME_TEXT }}
    steps:
      - name: Outupt github context
        run: | 
            echo "${{ toJSON(github) }}"
-           echo "Access env variables ${{ env.WELCOME_TEXT }}"
+           echo "Access env variables $WELCOME_TEXT"
