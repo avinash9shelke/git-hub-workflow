@@ -32,12 +32,15 @@ jobs:
        uses: actions/upload-artifact@v3
        with:
          name: my-artifact
-         path: |
-          /src/assets/   
+         path: ./src/assets/
   deploy:
    needs: build # name for the job which want's to complete first
    runs-on: ubuntu-latest
    steps:
      - name: Deploy
-       run: echo "Depploygin the application"
+       run: echo "Deploying the application"
+     - name : Download Artifact
+       uses: actions/download-artifact@v3
+       with:
+         
          
