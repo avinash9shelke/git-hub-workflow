@@ -10,7 +10,7 @@ jobs:
        uses: actions/cache@v3
        with:
          path: ~/.npm
-         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} # what needs to be cache
      - name: Install Node JS
        uses: actions/setup-node@v3
        with:
