@@ -18,9 +18,10 @@ jobs:
      - name: Install Dependencies
        run: npm ci
      - name: Run Tests
+       id: run-test
        run: npm test
      - name: Upload Test Report
-       if: steps.Run Tests.outcome == 'Success'
+       if: steps.run-test.outcome == 'Success'
        uses: actions/upload-artifact@v3
        with:
          name : test-report
