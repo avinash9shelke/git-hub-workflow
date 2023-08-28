@@ -1,0 +1,64 @@
+name: node-app-workflow
+on: [push,workflow_dispatch] # add multiple events # workflow_dispatch - manual trigger
+jobs:
+  test: 
+   runs-on: ubuntu-latest
+   steps:
+     - name: get code
+       uses: actions/checkout@v3
+     - name: Cache Dependencies
+       uses: actions/cache@v3
+       with:
+         path: ~/.npm
+         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} # what needs to be cache
+     - name: Install Node JS
+       uses: actions/setup-node@v3
+       with:
+         node-version: 18
+     - name: Install Dependencies
+       run: npm ci
+     - name: Run Tests
+       run: npm test
+     - name: Upload Test Report
+       if: steps.Run Tests.outcome == 'Success'
+       uses: actions/upload-artifact@v3
+       with:
+         name : test-report
+         path : test.json 
+       
+  build:
+   needs: test # name for the job which want's to complete first
+   runs-on: ubuntu-latest
+   steps:
+     - name: get code
+       uses: actions/checkout@v3
+     - name: Cache Dependencies
+       uses: actions/cache@v3
+       with:
+         path: ~/.npm
+         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}       
+     - name: Install Node JS
+       uses: actions/setup-node@v3
+       with:
+         node-version: 18
+     - name: Install Dependencies
+       run: npm ci
+     - name: Build Project
+       run: npm run build
+     - name: Upload Artifact
+       uses: actions/upload-artifact@v3
+       with:
+         name: my-artifact
+         path: ./src/assets/
+  deploy:
+   needs: build # name for the job which want's to complete first
+   runs-on: ubuntu-latest
+   steps:
+     - name: Deploy
+       run: echo "Deploying the application"
+     - name : Download Artifact
+       uses: actions/download-artifact@v3
+       with:
+          name: my-artifact
+     - name: Output the artifact
+       run: ls
