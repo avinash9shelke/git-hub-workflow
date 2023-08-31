@@ -12,8 +12,12 @@ jobs:
      - name: Cache Dependencies
        uses: actions/cache@v3
        with:
-         path: node_modules
-         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+         path: ~/.npm
+         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} # what needs to be cache
+     - name: Install Node JS
+       uses: actions/setup-node@v3
+       with:
+         node-version: 18         
      - name: Install Dependencies
        if: steps.cache.output.cache-hit !='true'
        run: npm-ci
