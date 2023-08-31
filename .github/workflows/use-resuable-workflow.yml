@@ -39,4 +39,4 @@ jobs:
        run: npm test
   deploy:
    needs: test # name for the job which want's to complete first
-   uses: ./github/workflows/reusable-workflow.yml
+   uses: ./reusable-workflow.yml
