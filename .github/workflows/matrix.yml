@@ -1,0 +1,17 @@
+name: Metrix Demo
+on: push
+jobs: 
+ build:
+   continue-on-error: true # continue the build even it's failed for one of the steps
+   strategy:
+     matrix:
+      node-version: [12,14,16]
+      operating-system : [ubuntu-latest,window-latest]
+   runs-on: ${{ matrix.operating-system }}
+   steps:
+     - name: Get Code 
+       uses: actions/checkout@v3
+     - name: Install Node Js
+       uses: actions/setup-node@v3
+       with:
+         node-version: ${{ matrix.node-version }}
